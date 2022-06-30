@@ -9,7 +9,7 @@ import (
 )
 
 // public variable
-var HiCmd, Loud, Quiet, Special cli.Command
+var HiCmd, Loud, Quiet, Special, Subcommands cli.Command
 
 func init() {
 
@@ -45,6 +45,31 @@ func init() {
 		Action: func(c *cli.Context) error {
 			fmt.Println("This is our most desperate hour. Help me, Obi-Wan Kenobi. You're my only hope.")
 			return nil
+		},
+	}
+
+	Subcommands = cli.Command{
+		Name:   "subcommand",
+		Usage:  "Used to test subcommands using a specific library",
+		Action: nil,
+		Subcommands: []*cli.Command{
+			{
+				Name:  "pog",
+				Usage: "Pog back at you!",
+				Action: func(c *cli.Context) error {
+					fmt.Println("foo bar test test 1234567890")
+					return nil
+				},
+			},
+
+			{
+				Name:  "secondsubcommand",
+				Usage: "Tests second subcommand",
+				Action: func(c *cli.Context) error {
+					fmt.Println("foo bar test test 1234567890")
+					return nil
+				},
+			},
 		},
 	}
 
