@@ -1,4 +1,4 @@
-package actions
+package main
 
 import (
 	"fmt"
@@ -20,6 +20,15 @@ var Quiet = cli.Command{
 	Usage: "Returns a mouse's whisper!",
 	Action: func(c *cli.Context) error {
 		fmt.Println("shhhh... don't be too loud.")
+		return nil
+	},
+}
+
+var Special = cli.Command{
+	Name:  "special",
+	Usage: "A very special message for a very special person.",
+	Action: func(c *cli.Context) error {
+		fmt.Println("This is our most desperate hour. Help me, Obi-Wan Kenobi. You're my only hope.")
 		return nil
 	},
 }

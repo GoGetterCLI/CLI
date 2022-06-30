@@ -9,7 +9,7 @@ import (
 )
 
 // public variable
-var HiCmd cli.Command
+var HiCmd, Loud, Quiet, Special cli.Command
 
 func init() {
 
@@ -21,12 +21,38 @@ func init() {
 			return nil
 		},
 	}
+	Loud = cli.Command{
+		Name:  "loud",
+		Usage: "Send a loud message!",
+		Action: func(c *cli.Context) error {
+			fmt.Println("WARNING HEADPHONE USERS!! EXTREMELY LOUD CONTENT!!")
+			return nil
+		},
+	}
+
+	Quiet = cli.Command{
+		Name:  "quiet",
+		Usage: "Returns a mouse's whisper!",
+		Action: func(c *cli.Context) error {
+			fmt.Println("shhhh... don't be too loud.")
+			return nil
+		},
+	}
+
+	Special = cli.Command{
+		Name:  "special",
+		Usage: "A very special message for a very special person.",
+		Action: func(c *cli.Context) error {
+			fmt.Println("This is our most desperate hour. Help me, Obi-Wan Kenobi. You're my only hope.")
+			return nil
+		},
+	}
 
 }
 
 func main() {
 	app := &cli.App{}
-	app.Commands = append(app.Commands, &HiCmd)
+	app.Commands = append(app.Commands, &HiCmd, &Special, &Quiet, &Loud)
 	err := app.Run(os.Args)
 	if err != nil {
 		log.Fatal(err)
