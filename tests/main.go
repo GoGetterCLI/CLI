@@ -49,9 +49,12 @@ func init() {
 	}
 
 	Subcommands = cli.Command{
-		Name:   "subcommand",
-		Usage:  "Used to test subcommands using a specific library",
-		Action: nil,
+		Name:  "subcommand",
+		Usage: "Used to test subcommands using a specific library",
+		Action: func(c *cli.Context) error {
+			fmt.Println("Try this with a subcommand!")
+			return nil
+		},
 		Subcommands: []*cli.Command{
 			{
 				Name:  "pog",
@@ -77,7 +80,7 @@ func init() {
 
 func main() {
 	app := &cli.App{}
-	app.Commands = append(app.Commands, &HiCmd, &Special, &Quiet, &Loud)
+	app.Commands = append(app.Commands, &HiCmd, &Special, &Quiet, &Loud, &Subcommands)
 	err := app.Run(os.Args)
 	if err != nil {
 		log.Fatal(err)
